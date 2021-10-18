@@ -1,7 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.main')
 @section('title', '詳細画面')
 @section('content')
-    <h1>画像詳細</h1>
     <section>
         <article class="card shadow position-relative">
             <figure class="m-3">
