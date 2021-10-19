@@ -24,22 +24,19 @@ class OAuthController extends Controller
         try {
             $socialUser = Socialite::with($provider)->user();
         } catch(\Exception $e) {
-            return redirect('/login')->withErrors(['oauth_error' => '予期せぬエラーが発生しました']);
+            // dd($e);
+            return redirect('/login')->withErrors(['oauth' => '予期せぬエラーが発生しました']);
         }
-        
-        // emailで検索してユーザーが見つかればそのユーザーを、見つからなければ新しいインスタンスを生成
-        $user = User::firstOrNew(['email' => $socialUser->getEmail()]);
 
-        // ユーザーが認証済みか確認
-        if ($user->exists) {
-            if ($user->identityProvider->name != $provider) {
-                return redirect('/login')->with('oauth_error', 'このメールアドレスはすでに別の認証で使われてます');
-            }
+        // emailで検索してユーザーが見つかればそのユーザーを、見つからなければ新しいインスタンスを生成
+        $identityProvider = IdentityProvider::firstOrNew(['id' => $socialUser->getId(), 'name' => $provider]);
+
+        // 新規ユーザーの処理
+        if ($identityProvider->exists) {
+            $user = $identityProvider->user;
         } else {
-            $user->name = $socialUser->getNickname() ?? $socialUser->name;
-            $identityProvider = new IdentityProvider([
-                'id' => $socialUser->getId(),
-                'name' => $provider
+            $user = new User([
+                'name' => $socialUser->getNickname() ?? $socialUser->name,
             ]);
 
             DB::beginTransaction();
@@ -48,6 +45,7 @@ class OAuthController extends Controller
                 $user->identityProvider()->save($identityProvider);
                 DB::commit();
             } catch (\Exception $e) {
+                // dd($e);
                 DB::rollBack();
                 return redirect()
                     ->route('login')
@@ -58,6 +56,6 @@ class OAuthController extends Controller
         // ログイン
         Auth::login($user);
 
-        return redirect()->route(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME);
     }
 }
