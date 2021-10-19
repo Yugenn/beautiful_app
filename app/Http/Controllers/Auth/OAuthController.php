@@ -29,14 +29,18 @@ class OAuthController extends Controller
         }
 
         // emailで検索してユーザーが見つかればそのユーザーを、見つからなければ新しいインスタンスを生成
-        $identityProvider = IdentityProvider::firstOrNew(['id' => $socialUser->getId(), 'name' => $provider]);
+        $user = User::firstOrNew(['email' => $socialUser->getEmail()]);
 
         // 新規ユーザーの処理
-        if ($identityProvider->exists) {
-            $user = $identityProvider->user;
+        if ($user->exists) {
+            if ($user->identityProvider->name != $provider) {
+                return redirect('/login')->withErrors(['oauth_error', 'このメールアドレスはすでに別の認証で使われてます']);
+            }
         } else {
-            $user = new User([
-                'name' => $socialUser->getNickname() ?? $socialUser->name,
+            $user->name = $socialUser->getNickname() ?? $socialUser->name;
+            $identityProvider = new IdentityProvider([
+                'id' => $socialUser->getId(),
+                'name' => $provider
             ]);
 
             DB::beginTransaction();
@@ -55,7 +59,6 @@ class OAuthController extends Controller
 
         // ログイン
         Auth::login($user);
-
         return redirect(RouteServiceProvider::HOME);
     }
 }
