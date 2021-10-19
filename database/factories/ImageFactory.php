@@ -25,7 +25,8 @@ class ImageFactory extends Factory
     {
         // 画像サイズを指定
         $width = 500;
-        $height = random_int(250, 600);
+        $height = 500;
+        // $height = random_int(250, 600);
         // 画像を保存してpathを取得
         $file = $this->faker->image(null, $width, $height);
         $path = Storage::putFile('articles', $file);
