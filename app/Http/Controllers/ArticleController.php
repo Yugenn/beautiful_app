@@ -61,8 +61,8 @@ class ArticleController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            foreach ($files as $file) {
-                if (!empty($path)) {
+            if (!empty($paths)) {
+                foreach ($paths as $path) {
                     Storage::delete($path);
                 }
             }
