@@ -13,22 +13,25 @@ class Article extends Model
     protected $fillable = [
         'title',
         'body',
+
     ];
 
-    public function image()
+    public function images()
     {
-        return $this->hasOne(Image::class);
+        return $this->hasMany(Image::class);
     }
 
     public function getImagePathAttribute()
     {
-        return 'articles/' . $this->image->name;
+        return 'articles/' . $this->images->first()->name;
+
     }
 
     public function getImageUrlAttribute()
     {
-        if (config('filesystems.default') == 'gcs'){
-            return Storage::temporaryUrl($this->image_path, now()->addMinutes(5));
-        } 
+        // if (config('filesystems.default') == 'gcs'){
+        //     return Storage::temporaryUrl($this->image_path, now()->addMinutes(5));
+        // } 
+        return Storage::url($this->image_path);
     }
 }

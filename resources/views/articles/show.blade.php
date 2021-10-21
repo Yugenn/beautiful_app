@@ -5,8 +5,12 @@
         <article class="card shadow position-relative">
             <figure class="m-3">
                 <div class="row">
-                    <div class="col-6">
-                        <img src="{{ $article->image_url }}" width="100%">
+                    <div class=“flex”>
+                        @foreach ($article->images as $image)
+                            <article class=“w-full”>
+                                <img class=“w-full” src="{{ Storage::url('articles/' . $image->name) }}" alt=“image”>
+                            </article>
+                        @endforeach
                     </div>
                     <div class="col-6">
                         <figcaption>
