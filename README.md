@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
@@ -61,4 +61,48 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
+
+
+# Beauty-app
+美人を投稿するアプリ
+
+## 概要
+・写真の復数アップロード可のCRUD機能付きアプリです
+・画像ファイルはFirebase上に保存
+
+
+## テーブル
+userテーブル・articleテーブル・imageテーブル
+https://docs.google.com/spreadsheets/d/1UmEoCsqmwuoIAk1YaU_dVwACzndVT6bnZDf0nnvLVqA/edit#gid=344105991
+
+## SNS認証
+github・googleでログイン、登録ができます
+
+## herokuデプロイ
+-まだ未完。のちほど記載-
+
+## スクリーンショット
+
+### login
+<img width="1280" alt="スクリーンショット 2021-10-21 14 02 39" src="https://user-images.githubusercontent.com/89439437/138214650-f9eb9fbf-2cc5-4cc2-908f-80c31e4637cb.png">
+
+
+### index
+<img width="1280" alt="スクリーンショット 2021-10-21 13 50 28" src="https://user-images.githubusercontent.com/89439437/138214731-f612e317-3715-443e-9c94-86325d4e30a1.png">
+
+
+### show1
+<img width="1280" alt="スクリーンショット 2021-10-21 13 53 05" src="https://user-images.githubusercontent.com/89439437/138214944-1f64ae0e-5131-4d1b-ad69-c3adfb276984.png">
+
+
+### show2
+<img width="1280" alt="スクリーンショット 2021-10-21 13 57 25" src="https://user-images.githubusercontent.com/89439437/138214846-8715d824-1550-4d25-987a-94b872c4ef10.png">
+
+
+### create
+<img width="1280" alt="スクリーンショット 2021-10-21 13 59 29" src="https://user-images.githubusercontent.com/89439437/138214915-ae762d3b-f736-42f8-bf31-8e4c1eec8100.png">
+
+
+### edit
+<img width="1280" alt="スクリーンショット 2021-10-21 13 59 14" src="https://user-images.githubusercontent.com/89439437/138215006-34157931-ee2b-49b6-a93d-3f5f188af647.png">
